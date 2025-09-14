@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Arbeitsblatt: Bits und Bytes im Alltag</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+    h1, h2 { color: #2c3e50; }
+    .task { margin-bottom: 30px; padding: 15px; border: 1px solid #ccc; border-radius: 10px; }
+    input, button { padding: 5px; margin-top: 5px; }
+    table { border-collapse: collapse; margin-top: 10px; }
+    table, th, td { border: 1px solid #333; padding: 8px; text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>Arbeitsblatt: Bits und Bytes im Alltag</h1>
+
+  <div class="task">
+    <h2>1. Was sind Bits und Bytes?</h2>
+    <p>Bit = kleinste Informationseinheit, kann nur <b>0</b> oder <b>1</b> sein.<br>
+    8 Bit = 1 Byte.</p>
+  </div>
+
+  <div class="task">
+    <h2>2. Bits und Bytes im Alltag</h2>
+    <ul>
+      <li>Ein Foto auf dem Handy: ca. 2 MB (über 16 Millionen Bits).</li>
+      <li>Ein Lied bei Spotify: ca. 3–5 MB.</li>
+      <li>Ein YouTube-Video (1 Minute, HD): 50–100 MB.</li>
+      <li>Eine WhatsApp-Nachricht: nur wenige Bytes.</li>
+    </ul>
+  </div>
+
+  <div class="task">
+    <h2>3. Wie viele Bits braucht dein Name?</h2>
+    <p>Jeder Buchstabe = 1 Byte = 8 Bit.</p>
+    <label>Gib deinen Namen ein: </label>
+    <input type="text" id="nameInput">
+    <button onclick="calcNameBits()">Berechnen</button>
+    <p id="nameResult"></p>
+  </div>
+
+  <div class="task">
+    <h2>4. Nachrichten berechnen</h2>
+    <label>Nachricht eingeben: </label>
+    <input type="text" id="msgInput">
+    <button onclick="calcMsgBits()">Berechnen</button>
+    <p id="msgResult"></p>
+  </div>
+
+  <div class="task">
+    <h2>5. Vergleich mit einem Foto (2 MB)</h2>
+    <label>Dein Name: </label>
+    <input type="text" id="photoNameInput">
+    <button onclick="comparePhoto()">Vergleichen</button>
+    <p id="photoResult"></p>
+  </div>
+
+  <div class="task">
+    <h2>6. Schätzfrage</h2>
+    <p>Ein 3-Minuten-Lied bei Spotify hat ca. 4 MB.<br>
+    Wie viele WhatsApp-Nachrichten mit „Hallo“ passen in ein Lied?</p>
+    <button onclick="calcHallo()">Antwort zeigen</button>
+    <p id="halloResult"></p>
+  </div>
+
+  <script>
+    function calcNameBits() {
+      let name = document.getElementById("nameInput").value;
+      let chars = name.length;
+      let bytes = chars;
+      let bits = chars * 8;
+      document.getElementById("nameResult").innerText = `${name} hat ${chars} Zeichen → ${bytes} Bytes → ${bits} Bits.`;
+    }
+
+    function calcMsgBits() {
+      let msg = document.getElementById("msgInput").value;
+      let chars = msg.length;
+      let bytes = chars;
+      let bits = chars * 8;
+      document.getElementById("msgResult").innerText = `Die Nachricht hat ${chars} Zeichen → ${bytes} Bytes → ${bits} Bits.`;
+    }
+
+    function comparePhoto() {
+      let name = document.getElementById("photoNameInput").value;
+      let chars = name.length;
+      if (chars === 0) {
+        document.getElementById("photoResult").innerText = "Bitte einen Namen eingeben.";
+        return;
+      }
+      let bytes = chars;
+      let photoBytes = 2_000_000; // 2 MB
+      let fits = Math.floor(photoBytes / bytes);
+      document.getElementById("photoResult").innerText = `Dein Name passt ca. ${fits} Mal in ein 2 MB Foto.`;
+    }
+
+    function calcHallo() {
+      let msgBytes = 5; // "Hallo" = 5 Buchstaben
+      let songBytes = 4_000_000; // 4 MB
+      let fits = Math.floor(songBytes / msgBytes);
+      document.getElementById("halloResult").innerText = `In ein Lied passen ca. ${fits.toLocaleString()} Nachrichten mit "Hallo".`;
+    }
+  </script>
+</body>
+</html>
